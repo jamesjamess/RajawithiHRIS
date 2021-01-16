@@ -1,32 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Header />
+
+    <Content />
+    <span class="title">1234</span>
+    <br />
+
+    <Footer @onClock="onClock" title="Copyright 2020 by Teerawut Ltd." color="gray" />
+    <div class="clock">{{time}}</div>
   </div>
 </template>
 
+<script>
+import Header from "@/components/layout/Header.vue";
+import Footer from "@/components/layout/Footer.vue";
+import Content from "@/components/layout/Content.vue";
+import moment from "moment";
+
+export default {
+  name: "app",
+  methods: {
+    onClock(value) {
+      this.time = moment(value).format("MM/DD/YYYY hh:mm:ss");
+    }
+  },
+  data() {
+    return {
+      time: ""
+    };
+  },
+  components: {
+    Header,
+    Content,
+    Footer
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.content {
+  color: pink;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.clock {
+  font-size: 12px;
 }
 </style>
